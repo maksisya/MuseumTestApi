@@ -1,5 +1,4 @@
 import requests
-from pydantic_models import ObjectsList
 
 
 # Запрос на получение объекта произведения искусства 436803
