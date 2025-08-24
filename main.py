@@ -1,81 +1,16 @@
-from pydantic import BaseModel
-from datetime import datetime
 import requests
-
-# Модель объекта произведения искусства
-class MuseumObject(BaseModel):
-    objectID: int
-    isHighlight: bool
-    accessionNumber: str
-    accessionYear: str
-    isPublicDomain: bool
-    primaryImage: str
-    primaryImageSmall: str
-    additionalImages: list
-    constituents: list
-    department: str
-    objectName: str
-    title: str
-    culture: str
-    period: str
-    dynasty: str
-    reign: str
-    portfolio: str
-    artistRole: str
-    artistPrefix: str
-    artistDisplayName: str
-    artistDisplayBio: str
-    artistSuffix: str
-    artistAlphaSort: str
-    artistNationality: str
-    artistBeginDate: str
-    artistEndDate: str
-    artistGender: str
-    artistWikidata_URL: str
-    artistULAN_URL: str
-    objectDate: str
-    objectBeginDate: int
-    objectEndDate: int
-    medium: str
-    dimensions: str
-    # dimensionsParsed: float
-    measurements: list
-    creditLine: str
-    geographyType: str
-    city: str
-    state: str
-    county: str
-    country: str
-    region: str
-    subregion: str
-    locale: str
-    locus: str
-    excavation: str
-    river: str
-    classification: str
-    rightsAndReproduction: str
-    linkResource: str
-    metadataDate: datetime
-    repository: str
-    objectURL: str
-    tags: list
-    objectWikidata_URL: str
-    isTimelineWork: bool
-    GalleryNumber: str
+from pydantic_models import ObjectsList
 
 
-# Модель списка произведений искусства
-class ObjectsList(BaseModel):
-    total: int
-    objectIDs: list
+# Запрос на получение объекта произведения искусства 436803
+def get_museum_object(obj_id):
+    r = requests.get(f"https://collectionapi.metmuseum.org/public/collection/v1/objects/{obj_id}")
+    # MuseumObject(**r.json())
+    return r
 
 
-if __name__ == '__main__':
-    r = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/436803")
-    response_dict = r.json()
-    MuseumObject(**response_dict)
-
-    r = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/search?q=sunflowers")
-    response_dict = r.json()
-    ObjectsList(**response_dict)
-
+# Запрос на получение списка объектов произведений искусства
+def get_museum_objects_list(payload):
+    r = requests.get(f"https://collectionapi.metmuseum.org/public/collection/v1/search", params=payload)
+    # ObjectsList(**r.json())
+    return r
