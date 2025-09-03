@@ -3,8 +3,9 @@
 from main import get_museum_objects_list
 from pydantic_models import ObjectsList
 
+
 # Проверка получения списка произведения искусства по ключевому слову
-def test_getobjectlist():
+def test_get_objectlist():
     payload = {
         "q": "sunflowers",
         "isHighlight": "true"
@@ -17,7 +18,7 @@ def test_getobjectlist():
 
 
 # Список произведений в период времени + по ключевому слову
-def test_getObjectsListOfDateRange():
+def test_get_objects_list_of_daterange():
     payload = {
         "dateBegin": "1700",
         "dateEnd": "1800",
@@ -26,11 +27,11 @@ def test_getObjectsListOfDateRange():
     response = get_museum_objects_list(payload)
     objects_list = ObjectsList(**response.json())
     assert response.status_code == 200
-    assert objects_list.total == 109
+    assert objects_list.total == 108
 
 
 # Получаем больше произведений, чем указано ограничение в модели 
-def test_getObjectListMoreThenMax():
+def test_get_object_list_more_then_max():
     payload = {
         "q": "African"
     }

@@ -39,7 +39,7 @@ class MuseumObject(BaseModel):
     medium: str
     dimensions: str
     dimensionsParsed: float = None
-    measurements: list
+    measurements: list = None
     creditLine: str
     geographyType: str
     city: str
@@ -58,7 +58,7 @@ class MuseumObject(BaseModel):
     metadataDate: datetime
     repository: str
     objectURL: str
-    tags: list
+    tags: list = None
     objectWikidata_URL: str
     isTimelineWork: bool
     GalleryNumber: str
